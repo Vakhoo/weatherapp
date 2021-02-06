@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Londrina Solid', sans-serif;
+}
+body{
+  background: #fec107;
+  padding: 0 10px;
+}
+.wrapper{
+  max-width: 500px;
+  width: 100%;
+  background: #fff;
+  margin: 50px auto;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.125);
+  padding: 30px;
+}
+
+.title{
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fec107;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.form{
+  width: 100%;
+}
+
+.inputfield{
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.inputfield label{
+   width: 200px;
+   color: #757575;
+   margin-right: 10px;
+  font-size: 14px;
+}
+
+.input
+{
+  width: 100%;
+  outline: none;
+  border: 1px solid #d5dbd9;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+
+.input:focus{
+  border: 1px solid #fec107;
+}
+
+.btn{
+    width: 100%;
+    padding: 8px 10px;
+  font-size: 15px; 
+  border: 0px;
+  background:  #fec107;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  animation: colors 6s infinite;
+}
+
+.btn:hover{
+  background: #ffd658;
+}
+
+.inputfield:last-child{
+  margin-bottom: 0;
+}
+
+@media (max-width:420px) {
+    .inputfield{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+    .inputfield label{
+    margin-bottom: 5px;
+  }
+    .inputfield.terms{
+    flex-direction: row;
+  }
+}
+@keyframes colors {
+    0% {
+        background:  #fec107;
+      }
+      50% {
+        background-color: green;
+      }
+      100% {
+
+        background-color: red;
+
+      }
+}
+

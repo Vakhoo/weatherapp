@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My site</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form method="POST" class="wrapper" action="/" id="form">
+        <div class="title">
+          Registration
+        </div>
+        <div class="form">
+          <div  style="color: red;">
+            <label id="errors"></label>
+         </div>
+           <div class="inputfield">
+              <label>First Name</label>
+              <input type="text" class="input" id="firstname">
+           </div>  
+            <div class="inputfield">
+              <label>Last Name</label>
+              <input type="text" class="input" id="lastname">
+           </div>  
+           <div class="inputfield">
+              <label>Password</label>
+              <input type="password" class="input" id="password">
+           </div>  
+          <div class="inputfield">
+              <label>Confirm Password</label>
+              <input type="password" class="input" id="confpassword">
+           </div> 
+          <div class="inputfield">
+            <input type="submit" value="Register" class="btn">
+          </div>
+        </div>
+    </form>
+
+
+    <script>
+      const firstname = document.getElementById('firstname');
+      const lastname = document.getElementById('lastname');
+      const password = document.getElementById('password');
+      const confpassword = document.getElementById('confpassword');
+      const email = document.getElementById('email');
+      const form = document.getElementById('form');
+      const errors = document.getElementById("errors")
+
+
+      form.addEventListener("submit", (e)=>{
+        let messages = []
+        let regex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (firstname.value=="" || firstname.value== null) {
+          messages.push("name is required")
+        }
+        if (lastname.value=="" || lastname.value== null) {
+          messages.push("lastname is required")
+        }
+
+        if (password.value.length<=6) {
+          messages.push("password must be longer then 6 characters")
+        }
+        if (password.value.length>=20) {
+          messages.push("password must be less then 20 characters")
+        }
+        if (password.value!=confpassword.value) {
+          messages.push("password doesnot match")
+        }
+
+        if (regex.test(email)){
+          messages.push("incorrect email format")
+        }
+        if (messages.length>0) {
+          e.preventDefault()
+          errors.innerText=messages.join(", ")
+        }
+      })
+
+    </script>
+    
+</body>
+</html> 

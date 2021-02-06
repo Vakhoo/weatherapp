@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>weather</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+
+  
+
+</head>
+
+<body style="background-color: #fec107;">
+    <div class="container" style="background-color:white; margin-top: 20px;">
+  <div class="container">
+      <div class="row">
+        <div class="col-6 m-auto" >
+          <h1 class="text-center">Weather</h1>
+        </div>
+      </div>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+      <div class="col-6 m-auto">
+          <div class="form-inline">
+                <div class="form-group m-auto">
+                    <input type="text" class="form-control" id="search-bar" name="city" placeholder="City">
+                    <button class="btn btn-primary ml-5" type="submit" id="search">Search</button>
+                </div>
+            </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-6 m-auto pt-5">
+        <h3 class="text-center">County code:</h3>
+        <h3 class="text-center" id="country_code"></h3>
+        <h4 class="text-center" id="city"></h4>
+        <h5 class="text-center" id="temp"></h5>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+<script src="weather.js"></script>
+<script>
+    let city="tbilisi"
+    let weather = {
+  apiKey: "bfc0c35c9d17cb14dba901db50a76262",
+  fetchWeather: function (city) {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city +
+        "&units=metric&appid=" +
+        this.apiKey
+    )
+      .then((response) => {
+        if (!response.ok) {
+          alert("No weather found.");
+          throw new Error("No weather found.");
+        }
+        return response.json();
+      })
+      .then((data) => this.displayWeather(data));
+  },
+  displayWeather: function (data) {
+    const { name } = data;
+    const temp= data.main["temp"];
+    const country_code= data.sys["country"];
+    document.getElementById("city").innerText = name;
+    document.getElementById("temp").innerText = temp + "°C";
+    document.getElementById("country_code").innerText = country_code;
+    console.log(data)
+  },
+  search: function () {
+     this.fetchWeather(document.getElementById("search-bar").value);
+     console.log(this.fetchWeather(document.getElementById("search-bar").value));
+
+     
+  },
+};
+
+document.getElementById("search").addEventListener("click", function () {
+  weather.search();
+});
+
+document
+  .getElementById("search-bar")
+  .addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+      weather.search();
+    }
+  });
+
+weather.fetchWeather("tbilisi");
+
+</script>
+
+</body>
+
+</html>
